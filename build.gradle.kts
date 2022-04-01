@@ -6,6 +6,7 @@ plugins {
 	kotlin("jvm") version "1.6.10"
 	kotlin("plugin.spring") version "1.6.10"
 	kotlin("plugin.jpa") version "1.6.10"
+	id("org.siouan.frontend-jdk8") version "6.0.0"
 }
 
 group = "com.zawinski"
@@ -25,7 +26,22 @@ dependencies {
 	runtimeOnly("mysql:mysql-connector-java")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	compileOnly("org.springframework.boot:spring-boot-devtools")
+	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 }
+
+buildscript {
+	repositories {
+		uri("https://plugins.gradle.org/m2/")
+	}
+	dependencies {
+		// For JDK 8+
+		classpath("org.siouan:frontend-gradle-plugin-jdk8:6.0.0")
+	}
+
+
+}
+
+apply(plugin = "org.siouan.frontend-jdk8")
 
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
